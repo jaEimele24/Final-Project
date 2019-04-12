@@ -3,15 +3,27 @@ from ggame import LineStyle, Color, Sprite, Sound, Frame
 import math, random
 from time import time
 civname=input("enter your civilization's name here: ")
-farmland=input("enter the initial amount of airable land here: ")
+farmland=float(input("enter the initial amount of airable land here: "))
 pop=float(input("enter the initial population here, 10 is optimal: "))
 class CivGame(App):
     def __init__(self):
         super().__init__()
-        black = Color(0xbbbb00,1)
+        black = Color(0x458B00,1)
         noline = LineStyle(0, black)
         bg_asset = RectangleAsset(self.width, self.height, noline, black)
-        bg = Sprite(bg_asset, (0,0)
+        bg = Sprite(bg_asset, (0,0))
+    
+    def step(self):
+        
+#Population Dynamics
+class population:
+    def step(self):
+        fooduse=10*pop
+        food=farmland*pop-fooduse
+        pop=pop+(.1*(food-fooduse))
+        print(pop)
+
+    
 
 
 myapp = CivGame()
