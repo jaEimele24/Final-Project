@@ -12,20 +12,21 @@ class CivGame(App):
         noline = LineStyle(0, black)
         bg_asset = RectangleAsset(self.width, self.height, noline, black)
         bg = Sprite(bg_asset, (0,0))
-        farmland=float(input("enter the initial amount of airable land here: "))
+        self.farmland=float(input("enter the initial amount of airable land here: "))
         pop=float(input("enter the initial population here, 10 is optimal: "))
-        self.pop=Population(pop)
+        self.pop=Population(pop, self.farmland)
     def step(self):
         self.pop.step()
 #Population Dynamics
 class Population:
-    def __init__(self, pop):
+    def __init__(self, pop, farmland):
         self.pop=pop
+        self.farmland=farmland
     def step(self):
-        fooduse=10*self.pop
-        food=farmland*self.pop-fooduse
+        fooduse=5*self.pop
+        food=self.farmland*self.pop-fooduse
         self.pop=self.pop+(.1*(food-fooduse))
-        print(pop)
+        print(self.pop)
 
     
 
