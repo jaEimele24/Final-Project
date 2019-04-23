@@ -47,7 +47,7 @@ class Population:
                 if (self.pop*.2)<self.farmland:
                     food=self.farmland*.8*self.pop-fooduse
                 if (self.pop*.2)>self.farmland:
-                    food=4*self.pop
+                    food=5*farmers
                 housecap=houses*10
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
@@ -58,7 +58,7 @@ class Population:
                     self.pop=self.pop
                 g=self.pop
                 print("The population of your civilization is {0}".format(round(g, 0)))
-                print("The food output of your civilization is {0}".format(food))
+                print("The food output of your civilization is {0}".format(round(food,0)))
             self.k=self.k-16
 
 
