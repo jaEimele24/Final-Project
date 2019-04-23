@@ -30,11 +30,29 @@ class Population:
         self.k=self.k+1
         if self.k==1:
             labor=self.pop
-            buildmaterial=2*labor
-            fooduse=5*self.pop
-            food=self.farmland*self.pop-fooduse
-            self.pop=self.pop+(.1*(food-fooduse))
-            print(self.pop)
+            woodcutters=.1*labor
+            builders=.1*labor
+            if self.forests>0:
+                wood=woodcutters*.1*self.forests
+                self.forests=self.forests-(wood*.5)
+            if self.forests==0 or self.forests<0:
+                wood=0
+            houses=wood*builders
+            fooduse=4*self.pop
+            if (self.pop*.2)<self.farmland:
+                food=self.farmland*.8*self.pop-fooduse
+            if (self.pop*.2)>self.farmland:
+                food=4*self.pop
+            housecap=houses*10
+            foodcap=food
+            if self.pop<foodcap and self.pop<housecap:
+                self.pop=self.pop+(.2*(self.pop))
+            elif self.pop>foodcap:
+                self.pop=selfpop-(self.pop-foodcap)
+            else: 
+                self.pop=self.pop
+            g=self.pop
+            print("The population of your civilization is {0}".format(round(g, 0)))
             self.k=self.k-16
 
 
