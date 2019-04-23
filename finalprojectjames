@@ -13,20 +13,30 @@ class CivGame(App):
         bg_asset = RectangleAsset(self.width, self.height, noline, black)
         bg = Sprite(bg_asset, (0,0))
         self.farmland=float(input("enter the initial amount of airable land here: "))
-        pop=float(input("enter the initial population here, 10 is optimal: "))
-        self.pop=Population(pop, self.farmland)
+        self.forests=float(input("enter the initialtamount of forests here: "))
+        self.k=0
+        pop=float(input("enter the initial population here,  at least 10 is optimal: "))
+        self.pop=Population(pop, self.farmland, self.k, self.forests)
     def step(self):
         self.pop.step()
 #Population Dynamics
 class Population:
-    def __init__(self, pop, farmland):
+    def __init__(self, pop, farmland, k, forests):
         self.pop=pop
         self.farmland=farmland
+        self.k=k
+        self.forests=forests
     def step(self):
-        fooduse=5*self.pop
-        food=self.farmland*self.pop-fooduse
-        self.pop=self.pop+(.1*(food-fooduse))
-        print(self.pop)
+        self.k=self.k+1
+        if self.k==1:
+            labor=self.pop
+            buildmaterial=2*labor
+            fooduse=5*self.pop
+            food=self.farmland*self.pop-fooduse
+            self.pop=self.pop+(.1*(food-fooduse))
+            print(self.pop)
+            self.k=self.k-16
+
 
     
 
