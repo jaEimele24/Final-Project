@@ -13,47 +13,54 @@ class CivGame(App):
         bg_asset = RectangleAsset(self.width, self.height, noline, black)
         bg = Sprite(bg_asset, (0,0))
         self.farmland=float(input("enter the initial amount of airable land here: "))
-        self.forests=float(input("enter the initialtamount of forests here: "))
+        self.forests=float(input("enter the initialt amount of forests here: "))
         self.k=0
+        self.metaldeposits=float(input("enter the amount of usable metals deposits there are: "))
+        self.initialtechlevel=input("enter the initial tech level here, either ancient, classical, mideval, renessance, industrial, modern, or future: ")
         pop=float(input("enter the initial population here,  at least 10 is optimal: "))
-        self.pop=Population(pop, self.farmland, self.k, self.forests)
+        self.pop=Population(pop, self.farmland, self.k, self.forests, self.initialtechlevel, self.metaldeposits)
     def step(self):
         self.pop.step()
 #Population Dynamics
 class Population:
-    def __init__(self, pop, farmland, k, forests):
+    def __init__(self, pop, farmland, k, forests, initialtechlevel, metaldeposits):
         self.pop=pop
         self.farmland=farmland
         self.k=k
         self.forests=forests
+        self.initialtechlevel=initialtechlevel
     def step(self):
         self.k=self.k+1
         if self.k==1:
-            labor=self.pop
-            woodcutters=.1*labor
-            builders=.1*labor
-            if self.forests>0:
-                wood=woodcutters*.1*self.forests
-                self.forests=self.forests-(wood*.5)
-            if self.forests==0 or self.forests<0:
-                wood=0
-            houses=wood*builders
-            fooduse=4*self.pop
-            if (self.pop*.2)<self.farmland:
-                food=self.farmland*.8*self.pop-fooduse
-            if (self.pop*.2)>self.farmland:
-                food=4*self.pop
-            housecap=houses*10
-            foodcap=food
-            if self.pop<foodcap and self.pop<housecap:
-                self.pop=self.pop+(.2*(self.pop))
-            elif self.pop>foodcap:
-                self.pop=selfpop-(self.pop-foodcap)
-            else: 
-                self.pop=self.pop
-            g=self.pop
-            print("The population of your civilization is {0}".format(round(g, 0)))
+            if self.initialtechlevel=="ancient":
+                labor=self.pop
+                woodcutters=.1*labor
+                builders=.1*labor
+                farmers=.8*labor
+                if self.forests>0:
+                    wood=woodcutters*.1*self.forests
+                    self.forests=self.forests-(wood*.5)
+                if self.forests==0 or self.forests<0:
+                    wood=0
+                houses=wood*builders
+                fooduse=4*farmers
+                if (self.pop*.2)<self.farmland:
+                    food=self.farmland*.8*self.pop-fooduse
+                if (self.pop*.2)>self.farmland:
+                    food=4*self.pop
+                housecap=houses*10
+                foodcap=food
+                if self.pop<foodcap and self.pop<housecap:
+                    self.pop=self.pop+(.2*(self.pop))
+                elif self.pop>foodcap:
+                    self.pop=selfpop-(self.pop-foodcap)
+                else: 
+                    self.pop=self.pop
+                g=self.pop
+                print("The population of your civilization is {0}".format(round(g, 0)))
+                print("The food output of your civilization is {0}".format(food))
             self.k=self.k-16
+
 
 
     
