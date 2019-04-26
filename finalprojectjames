@@ -18,23 +18,24 @@ class CivGame(App):
         self.metaldeposits=float(input("enter the amount of usable metals deposits there are: "))
         self.initialtechlevel=input("enter the initial tech level here, either ancient, classical, mideval, renessance, industrial, modern, or future: ")
         pop=float(input("enter the initial population here,  at least 10 is optimal: "))
-        self.pop=Population(pop, self.farmland, self.k, self.forests, self.initialtechlevel, self.metaldeposits)
+        self.techlevel="Ancient"
+        self.pop=Population(pop, self.farmland, self.k, self.forests, self.initialtechlevel, self.metaldeposits, self.techlevel)
     def step(self):
         self.pop.step()
 #Population Dynamics
 class Population:
-    def __init__(self, pop, farmland, k, forests, initialtechlevel, metaldeposits):
+    def __init__(self, pop, farmland, k, forests, initialtechlevel, metaldeposits, techlevel):
         self.pop=pop
         self.farmland=farmland
         self.k=k
         self.forests=forests
         self.initialtechlevel=initialtechlevel
         self.metaldeposits=metaldeposits
-        self.techlevel="ancient"
+        self.techlevel=techlevel
     def step(self):
         self.k=self.k+1
         if self.k==1:
-            if self.initialtechlevel=="ancient" and self.techlevel=="ancient:
+            if self.initialtechlevel=="ancient" and self.techlevel=="Ancient":
                 labor=self.pop
                 woodcutters=.1*labor
                 builders=.8*labor
@@ -60,12 +61,23 @@ class Population:
                     self.pop=self.pop
                 g=self.pop
                 inventors=random.randint(1,10)*(self.pop-(food-fooduse))
-                
+                print(inventors)
+                techadvancechance=0
+                techadvanceprogress=0
+                print("The housecap of your civilization is {0}".format(round(housecap,0)))
                 print("The population of your civilization is {0}".format(round(g, 0)))
                 print("The food output of your civilization is {0}".format(round(food,0)))
-            if self.initialtechlevel=="ancient":
-                
-            self.k=self.k-16
+                print("The food use of your civilization is {0}".format(round(fooduse,0)))
+                """
+                if self.initialtechlevel=="ancient" and inventors>10:
+                    techadvancechance=random.randint(0,10)*inventors*.2
+                    techadvanceprogress=techadvanceprogess+.1*(techadvancechance)
+                    if techadvanceprogress>=10:
+                        print("eureka")
+                        self.techlevel="classical"
+                """
+
+                self.k=self.k-32
 
 
 
