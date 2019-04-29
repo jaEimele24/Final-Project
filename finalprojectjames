@@ -47,13 +47,14 @@ class Population:
                     self.forests=self.forests-(wood*.5)
                 if self.forests==0 or self.forests<0:
                     wood=0
-                newhouses=.5*wood*builders
+                newhouses=wood*builders
                 self.houses=self.houses+newhouses
                 fooduse=self.pop
                 if (self.pop*.2)<self.farmland:
-                    food=self.farmland*.9*farmers
+                    food=1.2*farmers
                 if (self.pop*.2)>self.farmland:
-                    food=self.pop*.8*farmers
+                    food=self.farmers
+                    print("ohno")
                 housecap=self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
