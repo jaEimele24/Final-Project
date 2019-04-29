@@ -47,19 +47,19 @@ class Population:
                     self.forests=self.forests-(wood*.5)
                 if self.forests==0 or self.forests<0:
                     wood=0
-                newhouses=wood*builders
+                newhouses=.5*wood*builders
                 self.houses=self.houses+newhouses
-                fooduse=4*farmers
+                fooduse=self.pop
                 if (self.pop*.2)<self.farmland:
-                    food=self.farmland*.8*self.pop-fooduse
+                    food=self.farmland*.9*farmers
                 if (self.pop*.2)>self.farmland:
-                    food=5*farmers
+                    food=self.pop*.8*farmers
                 housecap=self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
                     self.pop=self.pop+(.2*(self.pop))
                 elif self.pop>foodcap:
-                    self.pop=selfpop-(self.pop-foodcap)
+                    self.pop=self.pop-(self.pop-foodcap)
                 else: 
                     self.pop=self.pop
                 g=self.pop
@@ -76,6 +76,7 @@ class Population:
                     if self.techadvanceprogress>=10:
                         print("eureka")
                         self.techlevel="classical"
+            """
             if self.techlevel=="classical":
                 labor=self.pop
                 miners=.04*self.labor
@@ -85,17 +86,17 @@ class Population:
                 builders=.075*self.labor
                 woodcutters=.075*self.labor
                 if self.forests>0:
-                    wood=woodcutters*.1*self.forests
+                    wood=woodcutters*.15*self.forests
                     self.forests=self.forests-(wood*.5)
                 if self.forests==0 or self.forests<0:
                     wood=0
                 newhouses=wood*builders
                 self.houses=self.houses+newhouses
                 fooduse=4*farmers
-                if (self.pop*.2)<self.farmland:
-                    food=self.farmland*.8*self.pop-fooduse
-                if (self.pop*.2)>self.farmland:
-                    food=5*farmers
+                if (self.pop*.18)<self.farmland:
+                    food=self.farmland*farmers-fooduse
+                if (self.pop*.18)>self.farmland:
+                    food=5*farmers-fooduse
                 housecap=self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
@@ -111,12 +112,12 @@ class Population:
                 print("The population of your civilization is {0}".format(round(g, 0)))
                 print("The food output of your civilization is {0}".format(round(food,0)))
                 print("The food use of your civilization is {0}".format(round(fooduse,0)))
-                    
+                """
                     
                     
                     
 
-                self.k=self.k-32
+            self.k=self.k-32
 
 
 
