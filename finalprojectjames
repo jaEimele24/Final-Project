@@ -92,7 +92,12 @@ class Population:
                 if self.forests==0 or self.forests<0:
                     wood=0
                 if self.metaldeposits > 0:
-                    ore=miners*.1*
+                    ore=miners*self.metaldeposits
+                    sel.metaldeposits=self.metaldeposits-(ore*.1)
+                if slef.forests<0 or self.metaldeposits<0:
+                    ore=0
+                if ore>0:
+                    tools=.2*((ore*(.5*random.randint(.9,1.1))))
                 newhouses=wood*builders
                 self.houses=self.houses+newhouses
                 fooduse=4*farmers
