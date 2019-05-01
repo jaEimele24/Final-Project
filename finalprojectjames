@@ -34,6 +34,9 @@ class Population:
         self.techlevel=techlevel
         self.techadvanceprogress=0
         self.houses=0
+        tools=0
+        barrels=0
+    
     def step(self):
         self.k=self.k+1
         if self.k==1:
@@ -75,7 +78,7 @@ class Population:
                 if self.initialtechlevel=="ancient" and inventors>10:
                     techadvancechance=random.randint(0,10)*inventors*.4
                     self.techadvanceprogress=self.techadvanceprogress+.025*(techadvancechance)
-                    print(self.techadvanceprogress)
+                    #print(self.techadvanceprogress)
                     if self.techadvanceprogress>=10:
                         print("eureka")
                         self.techlevel="classical"
@@ -101,11 +104,14 @@ class Population:
                 if self.forests<0 or self.metaldeposits<0:
                     ore=0
                 if ore>0:
-                    tools=.2*(ore*(.5))
+                    newtools=.2*ore
+                    tools=tools+newtools
+                #if ore>0:
+                    
                 newhouses=wood*builders
                 self.houses=self.houses+newhouses
                 fooduse=4*farmers
-                if (self.pop*.18)<self.farmland:
+                if (self.pop*.1)<self.farmland:
                     food=1.6*farmers
                 if (self.pop*.1)>self.farmland:
                     food=farmers
