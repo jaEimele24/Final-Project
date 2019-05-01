@@ -107,8 +107,11 @@ class Population:
                     newore=0
                 if self.ore>0:
                     newtools=.2*self.ore
-                    self.tools=tools+newtools
-                #if ore>0:
+                    self.tools=self.tools+newtools
+                if ore>0:
+                    newbarrels=.2*self.ore
+                    self.barrels=self.barrels+newbarrels
+                
                     
                 newhouses=wood*builders
                 self.houses=self.houses+newhouses
