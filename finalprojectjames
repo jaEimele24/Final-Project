@@ -47,6 +47,8 @@ class Population:
                     self.forests=self.forests-(wood*.5)
                 if self.forests==0 or self.forests<0:
                     wood=0
+                self.forests=self.forests*(.1*self.forests)
+                print(self.forests)
                 newhouses=wood*builders
                 self.houses=self.houses+newhouses
                 fooduse=self.pop
@@ -54,7 +56,7 @@ class Population:
                     food=1.4*farmers
                 if (self.pop*.2)>self.farmland:
                     food=farmers
-                    print("ohno")
+                    #print("ohno")
                 housecap=self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
@@ -66,10 +68,10 @@ class Population:
                 g=self.pop
                 inventors=random.randint(1,10)*(.01*self.pop)+(.0005*(food-fooduse))
                 techadvancechance=0
-                print("The housecap of your civilization is {0}".format((housecap)))
-                print("The population of your civilization is {0}".format(round(g, 0)))
-                print("The food output of your civilization is {0}".format(round(food,0)))
-                print("The food use of your civilization is {0}".format(round(fooduse,0)))
+                #print("The housecap of your civilization is {0}".format((housecap)))
+                #print("The population of your civilization is {0}".format(round(g, 0)))
+                #print("The food output of your civilization is {0}".format(round(food,0)))
+                #print("The food use of your civilization is {0}".format(round(fooduse,0)))
                 if self.initialtechlevel=="ancient" and inventors>10:
                     techadvancechance=random.randint(0,10)*inventors*.4
                     self.techadvanceprogress=self.techadvanceprogress+.025*(techadvancechance)
@@ -89,8 +91,10 @@ class Population:
                 if self.forests>0:
                     wood=woodcutters*.15*self.forests
                     self.forests=self.forests-(wood*.5)
+                    farmland=farmland+(self.forests-(self.forests-(wood*.5)))
                 if self.forests==0 or self.forests<0:
                     wood=0
+                self.forests=self.forests+(.1*self.forests)
                 if self.metaldeposits > 0:
                     ore=miners*self.metaldeposits
                     self.metaldeposits=self.metaldeposits-(ore*.1)
@@ -103,7 +107,7 @@ class Population:
                 fooduse=4*farmers
                 if (self.pop*.18)<self.farmland:
                     food=1.6*farmers
-                if (self.pop*.18)>self.farmland:
+                if (self.pop*.1)>self.farmland:
                     food=farmers
                     print("pleasegodnoyouroneofthemanr'tyou")
                 housecap=self.houses
