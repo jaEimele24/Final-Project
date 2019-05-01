@@ -34,8 +34,9 @@ class Population:
         self.techlevel=techlevel
         self.techadvanceprogress=0
         self.houses=0
-        tools=0
-        barrels=0
+        self.tools=0
+        self.barrels=0
+        self.ore=0
     
     def step(self):
         self.k=self.k+1
@@ -50,7 +51,7 @@ class Population:
                     self.forests=self.forests-(wood*.2)
                 if self.forests==0 or self.forests<0:
                     wood=0
-                self.forests=self.forests+(self.forests*.1)
+                self.forests=self.forests+(self.forests*.1)+2
                 print(self.forests)
                 newhouses=wood*builders
                 self.houses=self.houses+newhouses
@@ -97,15 +98,16 @@ class Population:
                     self.farmland=self.farmland+(self.forests-(self.forests-(wood*.5)))
                 if self.forests==0 or self.forests<0:
                     wood=0
-                self.forests=self.forests+(self.forests*.1)
+                self.forests=self.forests+(self.forests*.1)+2
                 if self.metaldeposits > 0:
-                    ore=miners*self.metaldeposits
-                    self.metaldeposits=self.metaldeposits-(ore*.1)
-                if self.forests<0 or self.metaldeposits<0:
-                    ore=0
-                if ore>0:
-                    newtools=.2*ore
-                    tools=tools+newtools
+                    newore=miners*self.metaldeposits
+                    self.metaldeposits=self.metaldeposits-(newore*.1)
+                    self.ore=self.ore+newore
+                if self.metaldeposits<0:
+                    newore=0
+                if self.ore>0:
+                    newtools=.2*self.ore
+                    self.tools=tools+newtools
                 #if ore>0:
                     
                 newhouses=wood*builders
