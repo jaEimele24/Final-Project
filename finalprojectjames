@@ -38,6 +38,7 @@ class Population:
         self.barrels=0
         self.ore=0
         self.consumergoods=0
+        self.ingots=0
     def step(self):
         self.k=self.k+1
         if self.k==1:
@@ -106,17 +107,20 @@ class Population:
                 if self.metaldeposits<0:
                     newore=0
                 if self.ore>0:
-                    newtools=.2*self.ore
+                    newingots=.5*ore*((20*smelters)/self.ore)
+                    self.ingots=self.ingots+newingots
+                if self.ingots>0:
+                    newtools=.2*self.ingots
                     self.tools=self.tools+newtools
-                if self.ore>0:
-                    newbarrels=.2*self.ore
+                if self.ingots>0:
+                    newbarrels=.2*self.ingots
                     self.barrels=self.barrels+newbarrels
-                if self.ore>0:
-                    newconsumergoods=.2*self.ore
+                if self.ingots>0:
+                    newconsumergoods=.2*self.ingots
                     self.comsumergoods=self.consumergoods+newconsumergoods
-                if self.ore>0 and wood>0:
-                    newbetterhouses=(.2*self.ore)+(
-                newhouses=.8*wood*builders
+                if self.ingots>0 and wood>0:
+                    newbetterhouses=.2*(builders/(.1*self.ingots))*(builders/(.1*wood))
+                newhouses=.8*wood*((builders/(.1*wood)))
                 self.houses=self.houses+newhouses
                 fooduse=4*farmers
                 if (self.pop*.1)<self.farmland:
