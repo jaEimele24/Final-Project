@@ -37,7 +37,7 @@ class Population:
         self.tools=0
         self.barrels=0
         self.ore=0
-    
+        self.consumergoods=0
     def step(self):
         self.k=self.k+1
         if self.k==1:
@@ -108,12 +108,15 @@ class Population:
                 if self.ore>0:
                     newtools=.2*self.ore
                     self.tools=self.tools+newtools
-                if ore>0:
+                if self.ore>0:
                     newbarrels=.2*self.ore
                     self.barrels=self.barrels+newbarrels
-                
-                    
-                newhouses=wood*builders
+                if self.ore>0:
+                    newconsumergoods=.2*self.ore
+                    self.comsumergoods=self.consumergoods+newconsumergoods
+                if self.ore>0 and wood>0:
+                    newbetterhouses=(.2*self.ore)+(
+                newhouses=.8*wood*builders
                 self.houses=self.houses+newhouses
                 fooduse=4*farmers
                 if (self.pop*.1)<self.farmland:
