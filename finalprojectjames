@@ -54,7 +54,7 @@ class Population:
                     wood=0
                 self.forests=self.forests+(self.forests*.1)+2
                 print(self.forests)
-                newhouses=wood*builders
+                newhouses=wood*(builders/(.1*wood))
                 self.houses=self.houses+newhouses
                 fooduse=self.pop
                 if (self.pop*.2)<self.farmland:
