@@ -94,13 +94,13 @@ class Population:
                 farmers=.8*labor
                 builders=.075*labor
                 woodcutters=.075*labor
+                self.forests=self.forests+(self.forests*.1)+2
                 if self.forests>0:
                     wood=woodcutters*.15*self.forests
                     self.forests=self.forests-(wood*.2)
                     self.farmland=self.farmland+(self.forests-(self.forests-(wood*.5)))
                 if self.forests==0 or self.forests<0:
                     wood=0
-                self.forests=self.forests+(self.forests*.1)+2
                 if self.metaldeposits > 0:
                     newore=miners*self.metaldeposits
                     self.metaldeposits=self.metaldeposits-(newore*.1)
@@ -120,7 +120,7 @@ class Population:
                     newconsumergoods=.2*self.ingots
                     self.comsumergoods=self.consumergoods+newconsumergoods
                 if self.ingots>0 and wood>0:
-                    newbetterhouses=.2*(builders/(.1*self.ingots))*(builders/(.1*wood))
+                    newbetterhouses=.2*(builders/(.1*(self.ingots+.00001)))*(builders/(.1*(wood+.00001)))
                 newhouses=.8*wood*((builders/(.1*(wood+.000001))))
                 self.houses=self.houses+newhouses
                 fooduse=4*farmers
@@ -135,8 +135,9 @@ class Population:
                     self.pop=self.pop+(.1*(self.pop))
                 elif self.pop>foodcap:
                     self.pop=self.pop-(self.pop-foodcap)
-                else: 
+                elif self.pop>housecap: 
                     self.pop=self.pop
+                    print("feels like a tokyo subway")
                 g=self.pop
                 inventors=random.randint(1,10)*(.01*self.pop)+(.0005*(food-fooduse))
                 techadvancechance=0
