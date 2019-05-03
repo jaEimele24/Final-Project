@@ -90,18 +90,19 @@ class Population:
             if self.techlevel=="classical":
                 labor=self.pop
                 miners=.04*labor
-                smelters=.005*labor
+                smelters=.004*labor
                 forgers=.005*labor
                 farmers=.8*labor
                 builders=.075*labor
                 woodcutters=.075*labor
+                artisans=.001*labor
                 self.forests=self.forests+(self.forests*.1)+(2*random.randint(1,2))
                 newbetterhouses=0
                 if self.forests==0 or self.forests<0:
                     wood=0
                     print("Ispeakforthetrees")
                 if self.forests>0:
-                    wood=woodcutters*.15*self.forests
+                    wood=woodcutters*.15*self.forests*(self.tools*(self.tools/woodcutters))
                     self.forests=self.forests-(wood*.2)
                     self.farmland=self.farmland+(self.forests-(self.forests-(wood*.5)))
                 if self.metaldeposits > 0:
@@ -136,7 +137,7 @@ class Population:
                 self.houses=self.houses+newhouses+(1.1*newbetterhouses)
                 fooduse=4*farmers
                 if (self.pop*.1)<self.farmland:
-                    food=1.6*farmers
+                    food=1.6*farmers*(self.tools*(.5*(farmers/self.tools)))
                 if (self.pop*.1)>self.farmland:
                     food=farmers
                     print("pleasegodnoyouroneofthemanr'tyou")
