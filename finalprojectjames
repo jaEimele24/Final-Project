@@ -65,7 +65,7 @@ class Population:
                 housecap=self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
-                    self.pop=self.pop+(.2*(self.pop))
+                    self.pop=self.pop+(.1*(self.pop))
                 elif self.pop>foodcap:
                     self.pop=self.pop-(self.pop-foodcap)
                 else: 
@@ -132,7 +132,7 @@ class Population:
                 housecap=self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
-                    self.pop=self.pop+(.2*(self.pop))
+                    self.pop=self.pop+(.1*(self.pop))
                 elif self.pop>foodcap:
                     self.pop=self.pop-(self.pop-foodcap)
                 else: 
