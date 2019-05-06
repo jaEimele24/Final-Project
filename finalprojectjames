@@ -133,6 +133,7 @@ class Population:
                 if self.ingots>0:
                     newweapons=.2*self.ingots
                     self.weapons=self.weapons+newweapons
+                economicputput=food+wood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons)
                 newhouses=.08*wood*((builders/(.1*(wood+.000001))))
                 self.houses=self.houses+newhouses+(1.1*newbetterhouses)
                 fooduse=4*farmers
