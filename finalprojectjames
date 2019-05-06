@@ -51,7 +51,7 @@ class Population:
                 if self.forests==0 or self.forests<0:
                     wood=0
                 if self.forests>0:
-                    wood=(woodcutters/(self.forests*10)*self.forests
+                    wood=(woodcutters/(self.forests*10))*self.forests
                     self.forests=self.forests-(wood*.2)
                 self.forests=self.forests+(self.forests*.1)+2
                 print(self.forests)
