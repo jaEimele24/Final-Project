@@ -147,7 +147,7 @@ class Population:
                 if self.pop<foodcap and self.pop<housecap:
                     popgrowth=self.pop+(.1*(self.pop))
                     if (popgrowth+self.pop)>housecap:
-                        self.pop=self.pop+
+                        self.pop=self.pop+(.2*self.pop)
                 elif self.pop>foodcap:
                     self.pop=self.pop-(self.pop-foodcap)
                 elif self.pop>housecap: 
