@@ -52,10 +52,10 @@ class Population:
                     wood=0
                 if self.forests>0:
                     wood=(woodcutters/(self.forests*10))*self.forests
-                    self.forests=self.forests-(wood*.2)
-                self.forests=self.forests+(self.forests*.1)+2
+                    self.forests=self.forests-(wood)
+                self.forests=self.forests+(self.forests*.002)+2
                 print(self.forests)
-                newhouses=wood*.1*(builders/(.1*(wood+.00001)))
+                newhouses=wood*.05*(builders/(.1*(wood+.00001)))
                 self.houses=self.houses+newhouses
                 fooduse=self.pop
                 if (self.pop*.2)<self.farmland:
@@ -137,12 +137,12 @@ class Population:
                 self.houses=self.houses+newhouses+(1.1*newbetterhouses)
                 fooduse=4*farmers
                 if (self.pop*.1)<self.farmland:
-                    food=1.6*farmers*(self.tools*(.5*(farmers/self.tools)))
+                    food=1.6*farmers*(self.tools*((self.tools/farmers)))
                 if (self.pop*.1)>self.farmland:
                     food=farmers
                     print("pleasegodnoyouroneofthemanr'tyou")
-                economicputput=food+wood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons)
-                economicoutputpercapita=economoutput/self.pop
+                economicoutput=food+wood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons)
+                economicoutputpercapita=economicoutput/self.pop
                 housecap=self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
