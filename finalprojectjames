@@ -137,7 +137,7 @@ class Population:
                 self.houses=self.houses+newhouses+(1.1*newbetterhouses)
                 fooduse=4*farmers
                 if (self.pop*.1)<self.farmland:
-                    food=1.6*farmers*(self.tools*((self.tools/farmers)))
+                    food=1.6*farmers*(farmers*((self.tools/farmers)))
                 if (self.pop*.1)>self.farmland:
                     food=farmers
                     print("pleasegodnoyouroneofthemanr'tyou")
