@@ -94,8 +94,9 @@ class Population:
                 forgers=.005*labor
                 farmers=.8*labor
                 builders=.075*labor
-                woodcutters=.075*labor
-                artisans=.001*labor
+                woodcutters=.073*labor
+                merchants=.001*labor
+                craftsmen=.002*labor
                 self.forests=self.forests+(self.forests*.1)+(2*random.randint(1,2))
                 newbetterhouses=0
                 if self.forests==0 or self.forests<0:
@@ -116,38 +117,41 @@ class Population:
                     self.ingots=self.ingots+newingots
                     ingotmarker=self.ingots
                 if self.ingots>0:
-                    newtools=.2*self.ingots
+                    newtools=.2*self.ingots*((20*craftsmen)/(.2*self.ingots))
                     self.tools=self.tools+newtools
                     self.ingots=self.ingots-(.2*ingotmarker)
-                    print(self.tools)
                 if self.ingots>0:
-                    newbarrels=.2*self.ingots
+                    newbarrels=.2*self.ingots*((20*craftsmen)/(.2*self.ingots))
                     self.barrels=self.barrels+newbarrels
                     self.ingots=self.ingots-(.2*ingotmarker)
                 if self.ingots>0:
-                    newconsumergoods=.2*self.ingots
+                    newconsumergoods=.2*self.ingots*((20*craftsmen)/(.2*self.ingots))
                     self.comsumergoods=self.consumergoods+newconsumergoods
                     self.ingots=self.ingots-(.2*ingotmarker)
                 if self.ingots>0 and wood>0:
                     newbetterhouses=.02*(builders/(.1*(self.ingots+.00001)))*(builders/(.1*(wood+.00001)))
                     self.ingots=self.ingots-(.2*ingotmarker)
                 if self.ingots>0:
-                    newweapons=.2*self.ingots
+                    newweapons=.2*self.ingots*((20*craftsmen)/(.2*self.ingots))
                     self.weapons=self.weapons+newweapons
                 newhouses=2*wood*((builders/(.1*(wood+.000001))))
                 self.houses=self.houses+newhouses+(1.1*newbetterhouses)
                 fooduse=4*farmers
                 if (self.pop*.1)<self.farmland:
-                    food=1.6*farmers*((3/(1+5*(2.718)^(-.5*((10*self.tools)/farmers))))+1)
+                    food=farmers*((3/(1+5*(2.718)**(-.5*((10*self.tools)/farmers))))+1)
+                    tooluse=.9*newtools
                 if (self.pop*.1)>self.farmland:
                     food=farmers
                     print("pleasegodnoyouroneofthemanr'tyou")
+                    self.tools=self.tools-tooluse
                 economicoutput=food+wood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons)
                 economicoutputpercapita=economicoutput/self.pop
+                diplomaticrelations=random.ranint(1,5)
+                trade=self.comsumergoods*(10*merchants)*self.weapons+self.trade*diplomaticrelations
                 housecap=self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
-                    popgrowth=self.pop+(.1*(self.pop))
+                    popgrowth=(.1*(self.pop))
                     if (popgrowth+self.pop)>housecap:
                         self.pop=self.pop+((self.pop+popgrowth)-housecap)
                     elif (popgrowth+self.pop)<housecap:
