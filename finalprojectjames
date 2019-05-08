@@ -146,8 +146,9 @@ class Population:
                     self.tools=self.tools-tooluse
                 economicoutput=food+wood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons)
                 economicoutputpercapita=economicoutput/self.pop
-                diplomaticrelations=random.ranint(1,5)
+                diplomaticrelations=random.randint(1,5)
                 trade=self.comsumergoods*(10*merchants)*self.weapons+self.trade*diplomaticrelations
+                wealth=economicoutput*(1.1/(1+(2.718)**(-.5*trade))+.45)
                 housecap=self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
