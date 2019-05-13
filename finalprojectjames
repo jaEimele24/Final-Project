@@ -134,6 +134,7 @@ class Population:
                 if self.ingots>0:
                     newweapons=.2*self.ingots*((20*craftsmen)/(.2*self.ingots))
                     self.weapons=self.weapons+newweapons
+                self.forests=self.forests+(self.forests*.002)+2
                 newhouses=2*wood*((builders/(.1*(wood+.000001))))
                 self.houses=self.houses+newhouses+(1.1*newbetterhouses)
                 fooduse=4*farmers
@@ -144,10 +145,10 @@ class Population:
                     food=farmers
                     print("pleasegodnoyouroneofthemanr'tyou")
                     self.tools=self.tools-tooluse
-                economicoutput=food+wood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons)
-                economicoutputpercapita=economicoutput/self.pop
                 diplomaticrelations=random.randint(1,5)
-                trade=self.comsumergoods*(10*merchants)*self.weapons+self.trade*diplomaticrelations
+                trade=self.comsumergoods*(10*merchants)+self.weapons*diplomaticrelations+self.barrels+self.tools+(.1*food)+(.1*wood)+(.1*newingots)
+                economicoutput=(food+wood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons))
+                economicoutputpercapita=economicoutput/self.pop
                 wealth=economicoutput*(1.1/(1+(2.718)**(-.5*trade))+.45)
                 housecap=self.houses
                 foodcap=food
