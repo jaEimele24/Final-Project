@@ -164,12 +164,20 @@ class Population:
                     self.pop=self.pop
                     print("feels like a tokyo subway")
                 g=self.pop
-                inventors=random.randint(1,10)*(.01*self.pop)+(.0005*(food-fooduse))
+                inventors=random.randint(1,10)*(.02*self.pop)+(.0005*(food-fooduse))
                 techadvancechance=0
+                
                 print("The housecap of your civilization is {0}".format((housecap)))
                 print("The population of your civilization is {0}".format(round(g, 0)))
                 print("The food output of your civilization is {0}".format(round(food,0)))
                 #print("The food use of your civilization is {0}".format(round(fooduse,0)))
+                if self.initialtechlevel=="ancient" and inventors>10:
+                    techadvancechance=random.randint(0,10)*inventors*.4
+                    self.techadvanceprogress=self.techadvanceprogress+.025*(techadvancechance)
+                    #print(self.techadvanceprogress)
+                    if self.techadvanceprogress>=15:
+                        print("eureka")
+                        self.techlevel="classical"
 
                     
                     
