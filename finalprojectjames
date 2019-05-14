@@ -151,7 +151,7 @@ class Population:
                     self.weapons=self.weapons+newweapons
                 self.forests=self.forests+(self.forests*.002)+2
                 if self.wood>0:
-                    newhouses=builders*1.2
+                    newhouses=builders*1.15
                     self.wood=self.wood-(newhouses*10)
                     self.houses=self.houses+newhouses+(1.5*self.betterhouses)
                 if self.wood<0 or self.wood==0:
@@ -194,7 +194,7 @@ class Population:
                     techadvancechance=random.randint(0,10)*inventors*.4
                     self.techadvanceprogress=self.techadvanceprogress+.025*(techadvancechance)
                     #print(self.techadvanceprogress)
-                    if self.techadvanceprogress>=200:
+                    if self.techadvanceprogress>=300:
                         print("eureka")
                         self.techlevel="mideval"
 
