@@ -146,6 +146,8 @@ class Population:
                     newhouses=builders*1.2
                     self.wood=self.wood-(newhouses*10)
                     self.houses=self.houses+newhouses+(1.5*self.betterhouses)
+                if self.wood<0 or self.wood==0:
+                    newhouses=0
                 fooduse=4*farmers
                 if (self.pop*.1)<self.farmland:
                     food=farmers*((3/(1+5*(2.718)**(-.5*((10*self.tools)/farmers))))+1)
