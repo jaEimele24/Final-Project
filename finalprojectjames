@@ -108,13 +108,18 @@ class Population:
                     newwood=0
                     print("Ispeakforthetrees")
                 if self.forests>0:
-                    newwood=7*woodcutters
-                    if self.forests-(newwood*.2)>0:
-                        self.forests=self.forests-(newwood*.2)
-                    if self.forests-(newwood*.2)<0:
+                    if self.forests-(woodcutters/7)>0:
+                        newwood=7*woodcutters
+                    if self.forests-(woodcutters/7)<0:
+                        newwood=self.forests*7
+                    if self.forests-(newwood/7)>0:
+                        self.forests=self.forests-(newwood/7)
+                    if self.forests-(newwood/7)<0:
                         self.forests=0
                     self.farmland=self.farmland+(self.forests-(self.forests-(newwood*.5)))
-                    self.wood+self.wood+newwood
+                    self.wood=self.wood+newwood
+                    print(newwood)
+                    print(self.wood)
                 if self.metaldeposits > 0:
                     newore=miners*11
                     self.metaldeposits=self.metaldeposits-(newore*.1)
@@ -140,7 +145,7 @@ class Population:
                 if self.ingots>0 and self.wood>0:
                     newbetterhouses=.02*(builders/(.1*(self.ingots+.00001)))*(builders/(.1*(self.wood+.00001)))
                     self.ingots=self.ingots-(.2*ingotmarker)
-                    self.betterhouses=self.betterhouses+newhouses
+                    self.betterhouses=self.betterhouses+newbetterhouses
                 if self.ingots>0:
                     newweapons=.2*self.ingots*((20*craftsmen)/(.2*self.ingots))
                     self.weapons=self.weapons+newweapons
