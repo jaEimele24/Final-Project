@@ -48,18 +48,18 @@ class Population:
             if self.initialtechlevel=="ancient" and self.techlevel=="ancient":
                 labor=self.pop
                 woodcutters=.1*labor
-                builders=.8*labor
+                builders=.1*labor
                 farmers=.8*labor
                 if self.forests==0 or self.forests<0:
                     newwood=0
                 if self.forests>0:
-                    newwood=(woodcutters/(self.forests*10))*self.forests
-                    self.forests=self.forests-(newwood)
+                    newwood=5*woodcutters
+                    self.forests=self.forests-(newwood*.2)
                     self.wood=self.wood+newwood
                 self.forests=self.forests+(self.forests*.002)+2
                 print(self.forests)
                 if self.wood>0:
-                    newhouses=.5*builders
+                    newhouses=builders
                     self.wood=self.wood-(newhouses*10)
                     self.houses=self.houses+newhouses
                 fooduse=self.pop
@@ -68,7 +68,7 @@ class Population:
                 if (self.pop*.2)>self.farmland:
                     food=farmers
                     #print("ohno")
-                housecap=self.houses
+                housecap=7*self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
                     self.pop=self.pop+(.1*(self.pop))
@@ -108,12 +108,12 @@ class Population:
                     wood=0
                     print("Ispeakforthetrees")
                 if self.forests>0:
-                    newwood=woodcutters*.15*self.forests*(self.tools*(self.tools/woodcutters))
+                    newwood=7*woodcutters
                     self.forests=self.forests-(newwood*.2)
                     self.farmland=self.farmland+(self.forests-(self.forests-(newwood*.5)))
                     self.wood+self.wood+newwood
                 if self.metaldeposits > 0:
-                    newore=miners*self.metaldeposits
+                    newore=miners*11
                     self.metaldeposits=self.metaldeposits-(newore*.1)
                     self.ore=self.ore+newore
                 if self.metaldeposits<0:
@@ -143,7 +143,7 @@ class Population:
                     self.weapons=self.weapons+newweapons
                 self.forests=self.forests+(self.forests*.002)+2
                 if self.wood>0:
-                    newhouses=((5/(1*2**(-.2*builders))-2))
+                    newhouses=builders*1.2
                     self.wood=self.wood-(newhouses*10)
                     self.houses=self.houses+newhouses
                 self.houses=self.houses+newhouses+(1.1*selfbetterhouses)
@@ -160,7 +160,7 @@ class Population:
                 economicoutput=(food+newwood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons))
                 economicoutputpercapita=economicoutput/self.pop
                 wealth=economicoutput*(1.1/(1+(2.718)**(-.5*trade))+.45)
-                housecap=self.houses
+                housecap=10*self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
                     popgrowth=(.1*(self.pop))
