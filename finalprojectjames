@@ -155,7 +155,7 @@ class Population:
                     print("pleasegodnoyouroneofthemanr'tyou")
                     self.tools=self.tools-tooluse
                 diplomaticrelations=random.randint(1,5)
-                trade=self.comsumergoods*(10*merchants)+self.weapons*diplomaticrelations+self.barrels+self.tools+(.1*food)+(.1*wood)+(.1*newingots)
+                trade=self.comsumergoods*(10*merchants)+self.weapons*diplomaticrelations+self.barrels+self.tools+(.1*food)+(.1*newwood)+(.1*newingots)
                 economicoutput=(food+newwood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons))
                 economicoutputpercapita=economicoutput/self.pop
                 wealth=economicoutput*(1.1/(1+(2.718)**(-.5*trade))+.45)
