@@ -105,7 +105,7 @@ class Population:
                 self.forests=self.forests+(self.forests*.1)+(2*random.randint(1,2))
                 newbetterhouses=0
                 if self.forests==0 or self.forests<0:
-                    wood=0
+                    newwood=0
                     print("Ispeakforthetrees")
                 if self.forests>0:
                     newwood=7*woodcutters
@@ -134,7 +134,7 @@ class Population:
                     newconsumergoods=.2*self.ingots*((20*craftsmen)/(.2*self.ingots))
                     self.comsumergoods=self.consumergoods+newconsumergoods
                     self.ingots=self.ingots-(.2*ingotmarker)
-                if self.ingots>0 and wood>0:
+                if self.ingots>0 and self.wood>0:
                     newbetterhouses=.02*(builders/(.1*(self.ingots+.00001)))*(builders/(.1*(self.wood+.00001)))
                     self.ingots=self.ingots-(.2*ingotmarker)
                     self.betterhouses=self.betterhouses+newhouses
@@ -145,8 +145,7 @@ class Population:
                 if self.wood>0:
                     newhouses=builders*1.2
                     self.wood=self.wood-(newhouses*10)
-                    self.houses=self.houses+newhouses
-                self.houses=self.houses+newhouses+(1.1*selfbetterhouses)
+                    self.houses=self.houses+newhouses+(1.5*self.betterhouses)
                 fooduse=4*farmers
                 if (self.pop*.1)<self.farmland:
                     food=farmers*((3/(1+5*(2.718)**(-.5*((10*self.tools)/farmers))))+1)
@@ -160,7 +159,7 @@ class Population:
                 economicoutput=(food+newwood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons))
                 economicoutputpercapita=economicoutput/self.pop
                 wealth=economicoutput*(1.1/(1+(2.718)**(-.5*trade))+.45)
-                housecap=10*self.houses
+                housecap=7*self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
                     popgrowth=(.1*(self.pop))
