@@ -42,7 +42,7 @@ class Population:
         self.weapons=0
         self.wood=0
         self.betterhouses=0
-        self.weath=o
+        self.weath=0
     def step(self):
         self.k=self.k+1
         if self.k==1:
