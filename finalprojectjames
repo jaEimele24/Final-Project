@@ -42,6 +42,7 @@ class Population:
         self.weapons=0
         self.wood=0
         self.betterhouses=0
+        self.weath=o
     def step(self):
         self.k=self.k+1
         if self.k==1:
@@ -168,7 +169,8 @@ class Population:
                 trade=self.comsumergoods*(10*merchants)+self.weapons*diplomaticrelations+self.barrels+self.tools+(.1*food)+(.1*newwood)+(.1*newingots)
                 economicoutput=(food+newwood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons))
                 economicoutputpercapita=economicoutput/self.pop
-                wealth=economicoutput*(1.1/(1+(2.718)**(-.5*trade))+.45)
+                newwealth=economicoutput*(1.1/(1+(2.718)**(-.5*trade))+.45)
+                self.wealth=self.weatlh+newwealth
                 housecap=7*self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
@@ -189,6 +191,7 @@ class Population:
                 print("The housecap of your civilization is {0}".format((housecap)))
                 print("The population of your civilization is {0}".format(round(g, 0)))
                 print("The food output of your civilization is {0}".format(round(food,0)))
+                print("The wealth of your civilization is {0}".format(round(self.wealth,0)))
                 #print("The food use of your civilization is {0}".format(round(fooduse,0)))
                 if self.initialtechlevel=="ancient" and inventors>10:
                     techadvancechance=random.randint(0,10)*inventors*.4
