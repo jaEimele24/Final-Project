@@ -40,6 +40,8 @@ class Population:
         self.consumergoods=0
         self.ingots=0
         self.weapons=0
+        self.wood=0
+        self.betterhouses=0
     def step(self):
         self.k=self.k+1
         if self.k==1:
@@ -49,14 +51,17 @@ class Population:
                 builders=.8*labor
                 farmers=.8*labor
                 if self.forests==0 or self.forests<0:
-                    wood=0
+                    newwood=0
                 if self.forests>0:
-                    wood=(woodcutters/(self.forests*10))*self.forests
-                    self.forests=self.forests-(wood)
+                    newwood=(woodcutters/(self.forests*10))*self.forests
+                    self.forests=self.forests-(newwood)
+                    self.wood=self.wood+newwood
                 self.forests=self.forests+(self.forests*.002)+2
                 print(self.forests)
-                newhouses=wood*((3/(1+5*(2.718)**(-.5*((10*self.tools)/builders))))+1)
-                self.houses=self.houses+newhouses
+                if self.wood>0:
+                    newhouses=.5*builders
+                    self.wood=self.wood-(newhouses*10)
+                    self.houses=self.houses+newhouses
                 fooduse=self.pop
                 if (self.pop*.2)<self.farmland:
                     food=1.4*farmers
@@ -103,9 +108,10 @@ class Population:
                     wood=0
                     print("Ispeakforthetrees")
                 if self.forests>0:
-                    wood=woodcutters*.15*self.forests*(self.tools*(self.tools/woodcutters))
-                    self.forests=self.forests-(wood*.2)
-                    self.farmland=self.farmland+(self.forests-(self.forests-(wood*.5)))
+                    newwood=woodcutters*.15*self.forests*(self.tools*(self.tools/woodcutters))
+                    self.forests=self.forests-(newwood*.2)
+                    self.farmland=self.farmland+(self.forests-(self.forests-(newwood*.5)))
+                    self.wood+self.wood+newwood
                 if self.metaldeposits > 0:
                     newore=miners*self.metaldeposits
                     self.metaldeposits=self.metaldeposits-(newore*.1)
@@ -129,14 +135,18 @@ class Population:
                     self.comsumergoods=self.consumergoods+newconsumergoods
                     self.ingots=self.ingots-(.2*ingotmarker)
                 if self.ingots>0 and wood>0:
-                    newbetterhouses=.02*(builders/(.1*(self.ingots+.00001)))*(builders/(.1*(wood+.00001)))
+                    newbetterhouses=.02*(builders/(.1*(self.ingots+.00001)))*(builders/(.1*(self.wood+.00001)))
                     self.ingots=self.ingots-(.2*ingotmarker)
+                    self.betterhouses=self.betterhouses+newhouses
                 if self.ingots>0:
                     newweapons=.2*self.ingots*((20*craftsmen)/(.2*self.ingots))
                     self.weapons=self.weapons+newweapons
                 self.forests=self.forests+(self.forests*.002)+2
-                newhouses=2*wood*((builders/(.1*(wood+.000001))))
-                self.houses=self.houses+newhouses+(1.1*newbetterhouses)
+                if self.wood>0:
+                    newhouses=((5/(1*2**(-.2*builders))-2))
+                    self.wood=self.wood-(newhouses*10)
+                    self.houses=self.houses+newhouses
+                self.houses=self.houses+newhouses+(1.1*selfbetterhouses)
                 fooduse=4*farmers
                 if (self.pop*.1)<self.farmland:
                     food=farmers*((3/(1+5*(2.718)**(-.5*((10*self.tools)/farmers))))+1)
@@ -147,7 +157,7 @@ class Population:
                     self.tools=self.tools-tooluse
                 diplomaticrelations=random.randint(1,5)
                 trade=self.comsumergoods*(10*merchants)+self.weapons*diplomaticrelations+self.barrels+self.tools+(.1*food)+(.1*wood)+(.1*newingots)
-                economicoutput=(food+wood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons))
+                economicoutput=(food+newwood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons))
                 economicoutputpercapita=economicoutput/self.pop
                 wealth=economicoutput*(1.1/(1+(2.718)**(-.5*trade))+.45)
                 housecap=self.houses
