@@ -109,7 +109,10 @@ class Population:
                     print("Ispeakforthetrees")
                 if self.forests>0:
                     newwood=7*woodcutters
-                    self.forests=self.forests-(newwood*.2)
+                    if self.forests-(newwood*.2)>0:
+                        self.forests=self.forests-(newwood*.2)
+                    if self.forests-(newwood*.2)<0:
+                        self.forests=0
                     self.farmland=self.farmland+(self.forests-(self.forests-(newwood*.5)))
                     self.wood+self.wood+newwood
                 if self.metaldeposits > 0:
