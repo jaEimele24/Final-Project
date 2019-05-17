@@ -207,12 +207,15 @@ class Population:
                     
 
             self.k=self.k-8
-class Graphic(Sprite):
+class House(Sprite):
     brown=Color(0x9C661F,1)
     houseline=LineStyle(2,brown)
     house_asset =RectangleAsset(10, 10, housetline, brown)
     def __init__(self, pop):
-        super().__init__():
+        super().__init__(House.house_asset,position):
+            for i in (0,(pop/10)+1):
+                House((random.randint(400,500),random.randint(400,500)),self)
+            
             
     
 
