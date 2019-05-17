@@ -209,8 +209,8 @@ class Population:
             self.k=self.k-8
 class Graphic(Sprite):
     brown=Color(0x9C661F,1)
-    bulletline=LineStyle(2,grey)
-    bullet_asset =RectangleAsset(4, 4, bulletline, grey)
+    houseline=LineStyle(2,brown)
+    house_asset =RectangleAsset(10, 10, bulletline, brown)
     def __init__(self, pop):
         super().__init__():
             
