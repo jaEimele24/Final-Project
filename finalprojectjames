@@ -210,7 +210,7 @@ class Population:
 class Graphic(Sprite):
     brown=Color(0x9C661F,1)
     houseline=LineStyle(2,brown)
-    house_asset =RectangleAsset(10, 10, bulletline, brown)
+    house_asset =RectangleAsset(10, 10, housetline, brown)
     def __init__(self, pop):
         super().__init__():
             
