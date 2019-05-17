@@ -63,6 +63,9 @@ class Population:
                     newhouses=builders
                     self.wood=self.wood-(newhouses*10)
                     self.houses=self.houses+newhouses
+                    if newhouses>0:
+                        for i in range(0,newhouses):
+                            house((random.randint(400,500), random.randint(400,500)),self)
                 fooduse=self.pop
                 if (self.pop*.2)<self.farmland:
                     food=1.4*farmers
@@ -210,11 +213,10 @@ class Population:
 class House(Sprite):
     brown=Color(0x9C661F,1)
     houseline=LineStyle(2,brown)
-    house_asset =RectangleAsset(10, 10, housetline, brown)
-    def __init__(self, pop):
-        super().__init__(House.house_asset,position):
-            for i in (0,(pop/10)+1):
-                House((random.randint(400,500),random.randint(400,500)),self)
+    house_asset=RectangleAsset(10, 10, houseline, brown)
+    def __init__(self, position):
+        super().__init__(House.asteroid_house, position)
+
             
             
     
