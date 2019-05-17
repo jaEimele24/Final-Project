@@ -64,8 +64,8 @@ class Population:
                     self.wood=self.wood-(newhouses*10)
                     self.houses=self.houses+newhouses
                     if newhouses>0:
-                        for i in range(0,newhouses):
-                            house((random.randint(400,500), random.randint(400,500)),self)
+                        for i in range(0,int(newhouses)):
+                            House((random.randint(400,500), random.randint(400,500)),self)
                 fooduse=self.pop
                 if (self.pop*.2)<self.farmland:
                     food=1.4*farmers
