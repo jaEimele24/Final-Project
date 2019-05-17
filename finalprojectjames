@@ -42,7 +42,7 @@ class Population:
         self.weapons=0
         self.wood=0
         self.betterhouses=0
-        self.weath=0
+        self.wealth=0
     def step(self):
         self.k=self.k+1
         if self.k==1:
@@ -170,7 +170,7 @@ class Population:
                 economicoutput=(food+newwood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons))
                 economicoutputpercapita=economicoutput/self.pop
                 newwealth=economicoutput*(1.1/(1+(2.718)**(-.5*trade))+.45)
-                self.wealth=self.weatlh+newwealth
+                self.wealth=self.wealth+newwealth
                 housecap=7*self.houses
                 foodcap=food
                 if self.pop<foodcap and self.pop<housecap:
@@ -201,11 +201,20 @@ class Population:
                         print("eureka")
                         self.techlevel="mideval"
 
+
                     
                     
                     
 
             self.k=self.k-8
+class Graphic(Sprite):
+    brown=Color(0x9C661F,1)
+    bulletline=LineStyle(2,grey)
+    bullet_asset =RectangleAsset(4, 4, bulletline, grey)
+    def __init__(self, pop):
+        super().__init__():
+            
+    
 
 
 
