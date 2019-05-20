@@ -59,13 +59,13 @@ class Population:
                     self.wood=self.wood+newwood
                 self.forests=self.forests+(self.forests*.002)+2
                 print(self.forests)
-                if self.wood>0 and self.houses<(7*self.pop*1.2):
+                if self.wood>0 and self.houses<(self.pop*1.2):
                     newhouses=builders
                     self.wood=self.wood-(newhouses*10)
                     self.houses=self.houses+newhouses
                     if newhouses>0:
                         for i in range(0,int(newhouses)):
-                            House((random.randint(400,500), random.randint(400,500)))
+                            House((random.randint(400,200), random.randint(400,200)))
                 fooduse=self.pop
                 if (self.pop*.2)<self.farmland:
                     food=1.4*farmers
@@ -154,14 +154,14 @@ class Population:
                     newweapons=.2*self.ingots*((20*craftsmen)/(.2*self.ingots))
                     self.weapons=self.weapons+newweapons
                 self.forests=self.forests+(self.forests*.002)+2
-                if self.wood>0 and self.houses<(7*self.pop*1.2):
+                if self.wood>0 and self.houses<(self.pop*1.2):
                     newhouses=builders*1.15
                     if newhouses>0:
                         for i in range(0,int(newhouses)):
-                            House((random.randint(400,500), random.randint(400,500)))
+                            House((random.randint(400,200), random.randint(400,200)))
                     self.wood=self.wood-(newhouses*10)
                     self.houses=self.houses+newhouses+(1.5*self.betterhouses)
-                if self.wood<0 or self.wood==0 or self.houses>(7*self.pop*1.2):
+                if self.wood<0 or self.wood==0 or self.houses>(self.pop*1.2):
                     newhouses=0
                 fooduse=4*farmers
                 if (self.pop*.1)<self.farmland:
@@ -176,6 +176,7 @@ class Population:
                 economicoutput=(food+newwood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons))
                 economicoutputpercapita=economicoutput/self.pop
                 newwealth=economicoutput*(1.1/(1+(2.718)**(-.5*trade))+.45)
+                qualityoflife=newwealth/self.pop
                 self.wealth=self.wealth+newwealth
                 housecap=7*self.houses
                 foodcap=food
@@ -198,6 +199,7 @@ class Population:
                 print("The population of your civilization is {0}".format(round(g, 0)))
                 print("The food output of your civilization is {0}".format(round(food,0)))
                 print("The wealth of your civilization is {0}".format(round(self.wealth,0)))
+                print("The quality of life of your civilization is[0]".format(round(qualityoflife,0)))
                 #print("The food use of your civilization is {0}".format(round(fooduse,0)))
                 if self.initialtechlevel=="ancient" and inventors>10:
                     techadvancechance=random.randint(0,10)*inventors*.4
