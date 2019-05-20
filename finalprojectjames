@@ -1,4 +1,4 @@
-from ggame import App, RectangleAsset, ImageAsset, SoundAsset, TriangleAsset
+from ggame import App, RectangleAsset, ImageAsset, SoundAsset, PolygonAsset
 from ggame import LineStyle, Color, Sprite, Sound, Frame
 import math, random
 from time import time
@@ -224,7 +224,7 @@ class House(Sprite):
 class tree(Sprite):
     green=Color(0x006400,1)
     treeline=LineStyle(1,green)
-    tree_asset=TriangleAsset(10, 10, 10, treeline, green)
+    tree_asset=PolygonAsset( treeline, green)
     def __init__(self, position):
         super().__init__(tree.tree_asset, position)
     
