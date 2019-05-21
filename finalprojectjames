@@ -4,7 +4,7 @@ import math, random
 from time import time
 civname=input("enter your civilization's name here: ")
 
-
+listtrees=[]
 class CivGame(App):
     def __init__(self):
         super().__init__()
@@ -16,6 +16,7 @@ class CivGame(App):
         self.forests=int(input("enter the initial amount of forests here: "))
         for i in range(0,(self.forests+1)):
             tree((random.randint(0,200), random.randint(0,200)))
+            listtrees.append(i)
         self.k=0
         self.metaldeposits=float(input("enter the amount of usable metals deposits there are: "))
         self.initialtechlevel=input("enter the initial tech level here, either ancient, classical, mideval, renessance, industrial, modern, or future: ")
@@ -60,6 +61,8 @@ class Population:
                     self.forests=self.forests-(newwood*.2)
                     self.wood=self.wood+newwood
                 self.forests=self.forests+(self.forests*.002)+2
+                for in range (0,(self.forests+self.forests*.002)+3):
+                    tree((random.randint(0,200), random.randint(0,200)))
                 print(self.forests)
                 if self.wood>0 and self.houses<(self.pop*1.2):
                     newhouses=builders
