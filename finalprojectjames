@@ -59,11 +59,14 @@ class Population:
                     newwood=int(5*woodcutters)
                     self.forests=int(self.forests-(newwood*.2))
                     for i in range(0,int(self.forests-(newwood*.2)+1)):
-                        l=random.choice(listtrees)
-                        listtrees.remove(l)
-                        l.destroy()
+                        if len(listtrees)>0:
+                            l=random.choice(listtrees)
+                            listtrees.remove(l)
+                            l.destroy()
                     self.wood=self.wood+newwood
                 self.forests=self.forests+(self.forests*.002)+2
+                for o in range(0,int(self.forests+(self.forests*.002)+3)):
+                    listtrees.append(tree((random.randint(0,200), random.randint(0,200))))
                 for i in range (0,int((self.forests+self.forests*.002)+3)):
                     tree((random.randint(0,200), random.randint(0,200)))
                 print(self.forests)
