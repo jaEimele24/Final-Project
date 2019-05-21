@@ -226,7 +226,7 @@ class House(Sprite):
 class tree(Sprite):
     green=Color(0x006400,1)
     treeline=LineStyle(1,green)
-    tree_asset=PolygonAsset(([(0,0),(2,4),(4,0)]), treeline, green)
+    tree_asset=PolygonAsset(([(0,20),(5,10),(10,20)]), treeline, green)
     def __init__(self, position):
         super().__init__(tree.tree_asset, position)
     
