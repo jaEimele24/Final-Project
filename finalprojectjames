@@ -15,9 +15,7 @@ class CivGame(App):
         self.farmland=float(input("enter the initial amount of airable land here: "))
         self.forests=int(input("enter the initial amount of forests here: "))
         for i in range(0,(self.forests+1)):
-            tree((random.randint(0,200), random.randint(0,200)))
-            i=tree((random.randint(0,200), random.randint(0,200)))
-            listtrees.append(i)
+            listtrees.append(tree((random.randint(0,200), random.randint(0,200))))
         self.k=0
         self.metaldeposits=float(input("enter the amount of usable metals deposits there are: "))
         self.initialtechlevel=input("enter the initial tech level here, either ancient, classical, mideval, renessance, industrial, modern, or future: ")
@@ -60,12 +58,13 @@ class Population:
                 if self.forests>0:
                     newwood=int(5*woodcutters)
                     self.forests=int(self.forests-(newwood*.2))
-                    for i in range(0,int(self.forests-(newwood*.2))):
-                        for u in listtrees:
-                            u.destroy()
+                    for i in range(0,int(self.forests-(newwood*.2)+1)):
+                        l=random.choice(listtrees)
+                        listtrees.remove(l)
+                        l.destroy()
                     self.wood=self.wood+newwood
                 self.forests=self.forests+(self.forests*.002)+2
-                for i in range (0,(self.forests+self.forests*.002)+3):
+                for i in range (0,int((self.forests+self.forests*.002)+3)):
                     tree((random.randint(0,200), random.randint(0,200)))
                 print(self.forests)
                 if self.wood>0 and self.houses<(self.pop*1.2):
