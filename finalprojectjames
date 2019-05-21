@@ -59,6 +59,8 @@ class Population:
                 if self.forests>0:
                     newwood=5*woodcutters
                     self.forests=self.forests-(newwood*.2)
+                    for in in range(0,(self.forests-(newwood*.2))):
+                        tree.destroy()
                     self.wood=self.wood+newwood
                 self.forests=self.forests+(self.forests*.002)+2
                 for in range (0,(self.forests+self.forests*.002)+3):
