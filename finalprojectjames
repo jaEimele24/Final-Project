@@ -49,6 +49,7 @@ class Population:
         self.k=self.k+1
         if self.k==1:
             if self.initialtechlevel=="ancient" and self.techlevel=="ancient":
+                print(listtrees)
                 labor=self.pop
                 woodcutters=.1*labor
                 builders=.1*labor
