@@ -98,7 +98,7 @@ class Population:
                 g=self.pop
                 inventors=random.randint(1,10)*(.01*self.pop)+(.0005*(food-fooduse))
                 techadvancechance=0
-                print("The number of forests is {0}".format(round(self.forests,0)))
+                print("The number of usable trees is {0}".format(round(self.forests,0)))
                 print("The housecap of your civilization is {0}".format((housecap)))
                 print("The population of your civilization is {0}".format(round(g, 0)))
                 print("The food output of your civilization is {0}".format(round(food,0)))
