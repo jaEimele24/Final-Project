@@ -70,7 +70,7 @@ class Population:
                     print("*** ", len(listtrees), "trees (just removed some)")
                     self.wood=self.wood+newwood
                 self.forests=self.forests+(self.forests*.002)+2
-                for i in range (0,int((self.forests*.002)+3)):
+                for i in range (0,int((self.forests*.002)+2)):
                     listtrees.append(tree((random.randint(0,200), random.randint(0,200))))
                 print("*** ", len(listtrees), "trees (just added some)")
                 #print(self.forests)
