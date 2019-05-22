@@ -49,7 +49,7 @@ class Population:
         self.k=self.k+1
         if self.k==1:
             if self.initialtechlevel=="ancient" and self.techlevel=="ancient":
-                print(listtrees)
+                #print(listtrees)
                 labor=self.pop
                 woodcutters=.1*labor
                 builders=.1*labor
@@ -59,17 +59,21 @@ class Population:
                 if self.forests>0:
                     newwood=int(5*woodcutters)
                     self.forests=int(self.forests-(newwood*.2))
+                    print("trees are mean")
+                    print(self.forests-(self.forests-(newwood*.2)))
                     for i in range(0,int(self.forests-(self.forests-(newwood*.2)+1))):
                         if len(listtrees)>0:
                             l=random.choice(listtrees)
-                            print(len(listtrees))
-                            listtrees.remove(l)
+                            #print(len(listtrees))
                             l.destroy()
+                            listtrees.remove(l)
+                    print("*** ", len(listtrees), "trees (just removed some)")
                     self.wood=self.wood+newwood
                 self.forests=self.forests+(self.forests*.002)+2
                 for i in range (0,int((self.forests+self.forests*.002)+3)):
-                    tree((random.randint(0,200), random.randint(0,200)))
-                print(self.forests)
+                    listtrees.append(tree((random.randint(0,200), random.randint(0,200))))
+                print("*** ", len(listtrees), "trees (just added some)")
+                #print(self.forests)
                 if self.wood>0 and self.houses<(self.pop*1.2):
                     newhouses=builders
                     self.wood=self.wood-(newhouses*10)
@@ -133,8 +137,8 @@ class Population:
                         self.forests=0
                     self.farmland=self.farmland+(self.forests-(self.forests-(newwood*.5)))
                     self.wood=self.wood+newwood
-                    print(newwood)
-                    print(self.wood)
+                    #print(newwood)
+                    #print(self.wood)
                 if self.metaldeposits > 0:
                     newore=miners*11
                     self.metaldeposits=self.metaldeposits-(newore*.1)
