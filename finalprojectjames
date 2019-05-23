@@ -122,7 +122,7 @@ class Population:
                 merchants=.001*labor
                 craftsmen=.002*labor
                 for i in range(0,int((forgers+smelters)/20)):
-                    industrielcenter((random.randint(700,800), random.randint(400,500)))
+                    industrielcenter((random.randint(700,900), random.randint(300,500)))
                 self.forests=self.forests+(self.forests*.1)+(2*random.randint(1,2))
                 for i in range (0,int((self.forests*.002)+2)):
                     listtrees.append(tree((random.randint(0,200), random.randint(0,200))))
@@ -179,7 +179,7 @@ class Population:
                     self.ingots=self.ingots-(.2*ingotmarker)
                     self.betterhouses=self.betterhouses+newbetterhouses
                     for i in range(0,int(newbetterhouses)):
-                        betterhouse((random.randint(200,700), random.randint(0,500)))
+                        betterhouse((random.randint(100,200), random.randint(500,600)))
                 if self.ingots>0:
                     newweapons=.2*self.ingots*((20*craftsmen)/(.2*self.ingots))
                     self.weapons=self.weapons+newweapons
@@ -259,7 +259,7 @@ class betterhouse(Sprite):
     def __init__(self, position):
         super().__init__(betterhouse.betterhouse_asset2, position)
 class industrielcenter(Sprite):
-    grey=Color(0x306998,1)
+    grey=Color(0x646464,1)
     industrielcenterline=LineStyle(2,grey)
     industrielcenter_asset=RectangleAsset(15, 15, industrielcenterline, grey)
     def __init__(self, position):
