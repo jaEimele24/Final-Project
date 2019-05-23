@@ -121,7 +121,11 @@ class Population:
                 woodcutters=.073*labor
                 merchants=.001*labor
                 craftsmen=.002*labor
+                for i in range(0,(forgers+smelters)/10):
+                    industrielcenter((random.randint(700,800), random.randint(500,600)))
                 self.forests=self.forests+(self.forests*.1)+(2*random.randint(1,2))
+                for i in range (0,int((self.forests*.002)+2)):
+                    listtrees.append(tree((random.randint(0,200), random.randint(0,200))))
                 newbetterhouses=0
                 if self.forests==0 or self.forests<0:
                     newwood=0
@@ -129,6 +133,13 @@ class Population:
                 if self.forests>0:
                     if self.forests-(woodcutters/7)>0:
                         newwood=7*woodcutters
+                        for i in range(0,int(self.forests-(self.forests-(newwood*.2)+1))):
+                            if len(listtrees)>0:
+                                l=random.choice(listtrees)
+                                #print(len(listtrees))
+                                l.destroy()
+                                listtrees.remove(l)
+                        print("*** ", len(listtrees), "trees (just removed some)")
                     if self.forests-(woodcutters/7)<0:
                         newwood=self.forests*7
                     if self.forests-(newwood/7)>0:
@@ -163,8 +174,12 @@ class Population:
                     self.ingots=self.ingots-(.2*ingotmarker)
                 if self.ingots>0 and self.wood>0:
                     newbetterhouses=.02*(builders/(.1*(self.ingots+.00001)))*(builders/(.1*(self.wood+.00001)))
+                    print("newbetterhouses is")
+                    print(newbetterhouses)
                     self.ingots=self.ingots-(.2*ingotmarker)
                     self.betterhouses=self.betterhouses+newbetterhouses
+                    for i in range(0,int(newbetterhouses)):
+                        betterhouse((random.randint(200,700), random.randint(0,500)))
                 if self.ingots>0:
                     newweapons=.2*self.ingots*((20*craftsmen)/(.2*self.ingots))
                     self.weapons=self.weapons+newweapons
@@ -236,6 +251,18 @@ class House(Sprite):
     house_asset=RectangleAsset(10, 10, houseline, brown)
     def __init__(self, position):
         super().__init__(House.house_asset, position)
+class betterhouse(Sprite):
+    yellow=Color(0xFFD43B,1)
+    houseline2=LineStyle(2,yellow)
+    betterhouse_asset2=RectangleAsset(15, 15, houseline2, yellow)
+    def __init__(self, position):
+        super().__init__(betterhouse.betterhouse_asset2, position)
+class industrielcenter(Sprite):
+    grey=Color(0x646464,1)
+    industrielcenterline=LineStyle(2,grey)
+    industrielcenter_asset=RectangleAsset(15, 15, industrielcenterline, grey)
+    def __init__(self, position):
+        super().__init__(industrielcenter.industrielcenter_asset, position)
 class tree(Sprite):
     green=Color(0x006400,1)
     treeline=LineStyle(1,green)
