@@ -45,6 +45,8 @@ class Population:
         self.wood=0
         self.betterhouses=0
         self.wealth=0
+        self.diplomaticrelations=0
+        self.trade=0
     def step(self):
         self.k=self.k+1
         if self.k==1:
@@ -202,11 +204,12 @@ class Population:
                     food=farmers
                     print("pleasegodnoyouroneofthemanr'tyou")
                     self.tools=self.tools-tooluse
-                diplomaticrelations=random.randint(1,5)
-                trade=self.comsumergoods*(10*merchants)+self.weapons*diplomaticrelations+self.barrels+self.tools+(.1*food)+(.1*newwood)+(.1*newingots)
+                improvementrelations=random.randint(1,2)+(self.trade/1000)
+                self.diplomaticrelations=self.diplomaticrelations+improvementrelations
+                self.trade=self.comsumergoods*(10*merchants)+self.weapons*self.diplomaticrelations+self.barrels+self.tools+(.1*food)+(.1*newwood)+(.1*newingots)
                 economicoutput=(food+newwood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons))
                 economicoutputpercapita=economicoutput/self.pop
-                newwealth=economicoutput*(2/(1+(2.718)**(-.05*trade))+.45)
+                newwealth=economicoutput*(2/(1+(2.718)**(-.05*self.trade))+.45)
                 qualityoflife=newwealth/self.pop
                 self.wealth=self.wealth+newwealth
                 housecap=7*self.houses
@@ -232,6 +235,7 @@ class Population:
                 print("The new wealth of your civilization is {0}".format(round(newwealth,0)))
                 print("The total wealth of your civilization is {0}".format(round(self.wealth,0)))
                 print("The quality of life of your civilization is{0}".format(round(qualityoflife,1)))
+                print("The strength of diplomatic relations is{0}".format(round(self.diplomaticrelations,1)))
                 #print("The food use of your civilization is {0}".format(round(fooduse,0)))
                 if self.initialtechlevel=="ancient" and inventors>10:
                     techadvancechance=random.randint(0,10)*inventors*.4
