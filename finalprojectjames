@@ -161,7 +161,10 @@ class Population:
                     #print(self.wood)
                 if self.metaldeposits > 0:
                     newore=miners*11
-                    self.metaldeposits=self.metaldeposits-(newore*.01)
+                    if self.metaldeposits-(newore*.01)>0
+                        self.metaldeposits=self.metaldeposits-(newore*.01)
+                    elif self.metaldeposits-(newore*.01)<0:
+                        self.metaldeposits=0
                     self.ore=self.ore+newore
                     for i in range(0,int(self.metaldeposits-(self.metaldeposits-(newore*.01)))):
                         if len(listmetal)>0:
@@ -246,9 +249,9 @@ class Population:
                 print("The food output of your civilization is {0}".format(round(food,0)))
                 print("The new wealth of your civilization is {0}".format(round(newwealth,0)))
                 print("The total wealth of your civilization is {0}".format(round(self.wealth,0)))
-                print("The quality of life of your civilization is{0}".format(round(qualityoflife,1)))
-                print("The strength of diplomatic relations is{0}".format(round(self.diplomaticrelations,1)))
-                print("The number of metaldeposits is{0}".format(round(self.metaldeposits,1)))
+                print("The quality of life of your civilization is {0}".format(round(qualityoflife,1)))
+                print("The strength of diplomatic relations is {0}".format(round(self.diplomaticrelations,1)))
+                print("The number of metaldeposits is {0}".format(round(self.metaldeposits,1)))
                 #print("The food use of your civilization is {0}".format(round(fooduse,0)))
                 if self.initialtechlevel=="ancient" and inventors>10:
                     techadvancechance=random.randint(0,10)*inventors*.4
