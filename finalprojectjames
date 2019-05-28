@@ -5,6 +5,7 @@ from time import time
 civname=input("enter your civilization's name here: ")
 
 listtrees=[]
+listmetal=[]
 class CivGame(App):
     def __init__(self):
         super().__init__()
@@ -14,10 +15,12 @@ class CivGame(App):
         bg = Sprite(bg_asset, (0,0))
         self.farmland=float(input("enter the initial amount of airable land here: "))
         self.forests=int(input("enter the initial amount of forests here: "))
-        for i in range(0,(self.forests+1)):
+        for i in range(0,(self.forests)):
             listtrees.append(tree((random.randint(0,200), random.randint(0,200))))
         self.k=0
         self.metaldeposits=float(input("enter the amount of usable metals deposits there are: "))
+        for i in range(0,int((self.metaldeposits))):
+            listmetal.append(metaldeposit((random.randint(400,600), random.randint(400,600))))
         self.initialtechlevel=input("enter the initial tech level here, either ancient, classical, mideval, renessance, industrial, modern, or future: ")
         pop=float(input("enter the initial population here,  at least 10 is optimal: "))
         self.techlevel=self.initialtechlevel
@@ -117,12 +120,16 @@ class Population:
                 labor=self.pop
                 miners=.04*labor
                 smelters=.004*labor
-                forgers=.005*labor
+                forgers=.004*labor
                 farmers=.8*labor
                 builders=.075*labor
-                woodcutters=.073*labor
+                woodcutters=.071*labor
                 merchants=.001*labor
-                craftsmen=.002*labor
+                nobles=.001*labor
+                craftsmen=.004*labor
+                upperclass=merchants+nobles
+                middleclass=craftsmen+(.25*farmers)
+                lowerclass=(.75*farmers)+builders+woodcutters+forgers+smelters+miners
                 for i in range(0,int((forgers+smelters)/20)):
                     industrielcenter((random.randint(700,900), random.randint(300,500)))
                 self.forests=self.forests+(self.forests*.1)+(2*random.randint(1,2))
@@ -163,7 +170,7 @@ class Population:
                     self.ingots=self.ingots+newingots
                     ingotmarker=self.ingots
                 if self.ingots>0:
-                    newtools=.2*self.ingots*((20*craftsmen)/(.2*self.ingots))
+                    newtools=.2*self.ingots*((20*forgers)/(.2*self.ingots))
                     self.tools=self.tools+newtools
                     self.ingots=self.ingots-(.2*ingotmarker)
                 if self.ingots>0:
@@ -241,7 +248,7 @@ class Population:
                     techadvancechance=random.randint(0,10)*inventors*.4
                     self.techadvanceprogress=self.techadvanceprogress+.025*(techadvancechance)
                     #print(self.techadvanceprogress)
-                    if self.techadvanceprogress>=300:
+                    if self.techadvanceprogress>=500:
                         print("eureka")
                         self.techlevel="mideval"
 
@@ -264,9 +271,9 @@ class betterhouse(Sprite):
     def __init__(self, position):
         super().__init__(betterhouse.betterhouse_asset2, position)
 class industrielcenter(Sprite):
-    grey=Color(0x646464,1)
-    industrielcenterline=LineStyle(2,grey)
-    industrielcenter_asset=RectangleAsset(15, 15, industrielcenterline, grey)
+    blue=Color(0x646464,1)
+    industrielcenterline=LineStyle(2,blue)
+    industrielcenter_asset=RectangleAsset(15, 15, industrielcenterline, blue)
     def __init__(self, position):
         super().__init__(industrielcenter.industrielcenter_asset, position)
 class tree(Sprite):
@@ -275,6 +282,13 @@ class tree(Sprite):
     tree_asset=PolygonAsset(([(0,20),(5,10),(10,20)]), treeline, green)
     def __init__(self, position):
         super().__init__(tree.tree_asset, position)
+class metaldeposit(Sprite):
+    grey=Color(0x808A87,1)
+    metaldepositline=LineStyle(2, grey)
+    metaldeposit_asset=PolygonAsset(([(0,40),(10,20),(20,40)]), metaldepositline, grey)
+    def __init__(self, position):
+        super().__init__(metaldeposit.metaldeposit_asset, position)
+    
     
 
             
