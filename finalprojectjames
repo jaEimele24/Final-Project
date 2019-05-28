@@ -161,7 +161,7 @@ class Population:
                     #print(self.wood)
                 if self.metaldeposits > 0:
                     newore=miners*11
-                    if self.metaldeposits-(newore*.01)>0
+                    if (self.metaldeposits-(newore*.01))>0:
                         self.metaldeposits=self.metaldeposits-(newore*.01)
                     elif self.metaldeposits-(newore*.01)<0:
                         self.metaldeposits=0
