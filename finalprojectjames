@@ -161,8 +161,13 @@ class Population:
                     #print(self.wood)
                 if self.metaldeposits > 0:
                     newore=miners*11
-                    self.metaldeposits=self.metaldeposits-(newore*.1)
+                    self.metaldeposits=self.metaldeposits-(newore*.01)
                     self.ore=self.ore+newore
+                    for i in range(0,int(self.metaldeposits-(self.metaldeposits-(newore*.01)))):
+                        if len(listmetal)>0:
+                            j=random.choice(listmetal)
+                            j.destroy()
+                            listmetal.remove(j)
                 if self.metaldeposits<0:
                     newore=0
                 if self.ore>0:
