@@ -20,7 +20,7 @@ class CivGame(App):
         self.k=0
         self.metaldeposits=float(input("enter the amount of usable metals deposits there are: "))
         for i in range(0,int((self.metaldeposits))):
-            listmetal.append(metaldeposit((random.randint(400,600), random.randint(400,600))))
+            listmetal.append(metaldeposit((random.randint(700,900), random.randint(0,200))))
         self.initialtechlevel=input("enter the initial tech level here, either ancient, classical, mideval, renessance, industrial, modern, or future: ")
         pop=float(input("enter the initial population here,  at least 10 is optimal: "))
         self.techlevel=self.initialtechlevel
