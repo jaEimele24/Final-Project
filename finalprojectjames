@@ -248,6 +248,7 @@ class Population:
                 print("The total wealth of your civilization is {0}".format(round(self.wealth,0)))
                 print("The quality of life of your civilization is{0}".format(round(qualityoflife,1)))
                 print("The strength of diplomatic relations is{0}".format(round(self.diplomaticrelations,1)))
+                print("The number of metaldeposits is{0}".format(round(self.metaldeposits,1)))
                 #print("The food use of your civilization is {0}".format(round(fooduse,0)))
                 if self.initialtechlevel=="ancient" and inventors>10:
                     techadvancechance=random.randint(0,10)*inventors*.4
