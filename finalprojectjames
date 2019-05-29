@@ -50,6 +50,7 @@ class Population:
         self.wealth=0
         self.diplomaticrelations=0
         self.trade=0
+        self.food=0
     def step(self):
         self.k=self.k+1
         if self.k==1:
@@ -130,7 +131,7 @@ class Population:
                 upperclass=merchants+nobles
                 middleclass=craftsmen+(.25*farmers)
                 lowerclass=(.75*farmers)+builders+woodcutters+forgers+smelters+miners
-                for i in range(0,int((forgers+smelters)/20)):
+                for i in range(0,int((forgers+smelters)/15)):
                     industrielcenter((random.randint(700,900), random.randint(300,500)))
                 self.forests=self.forests+(self.forests*.1)+(2*random.randint(1,2))
                 for i in range (0,int((self.forests*.002)+2)):
@@ -149,29 +150,34 @@ class Population:
                                 l.destroy()
                                 listtrees.remove(l)
                         print("*** ", len(listtrees), "trees (just removed some)")
-                    if self.forests-(woodcutters/7)<0:
-                        newwood=self.forests*7
-                    if self.forests-(newwood/7)>0:
-                        self.forests=self.forests-(newwood/7)
-                    if self.forests-(newwood/7)<0:
-                        self.forests=0
-                    self.farmland=self.farmland+(self.forests-(self.forests-(newwood*.5)))
-                    self.wood=self.wood+newwood
-                    #print(newwood)
-                    #print(self.wood)
+                if self.forests-(woodcutters/7)<0:
+                    newwood=self.forests*7
+                if self.forests-(newwood/7)>0:
+                    self.forests=self.forests-(newwood/7)
+                if self.forests-(newwood/7)<0:
+                    self.forests=0
+                self.farmland=self.farmland+(self.forests-(self.forests-(newwood*.1)))
+                self.wood=self.wood+newwood
+                #print(newwood)
+                #print(self.wood)
                 if self.metaldeposits > 0:
                     newore=miners*11
                     if (self.metaldeposits-(newore*.01))>0:
-                        self.metaldeposits=self.metaldeposits-(newore*.01)
+                        self.metaldeposits=self.metaldeposits-(newore*.001)
                     elif self.metaldeposits-(newore*.01)<0:
                         self.metaldeposits=0
                     self.ore=self.ore+newore
-                    for i in range(0,int(self.metaldeposits-(self.metaldeposits-(newore*.01)))):
+                    for i in range(0,int(self.metaldeposits-(self.metaldeposits-(newore*.001)))):
                         if len(listmetal)>0:
                             j=random.choice(listmetal)
                             j.destroy()
                             listmetal.remove(j)
-                if self.metaldeposits<0:
+                if self.metaldeposits==0 or self.metaldeposits<0 and len(listmetal)>0:
+                    for i in range(0,len(listmetal)):
+                        y=random.choice(listmetal)
+                        y.destroy()
+                        listmetal.remove(y)
+                if self.metaldeposits<0 or self.metaldeposits==0:
                     newore=0
                 if self.ore>0:
                     newingots=.5*self.ore*((20*smelters)/self.ore)
@@ -213,10 +219,12 @@ class Population:
                 fooduse=4*farmers
                 tooluse=0
                 if (self.pop*.1)<self.farmland:
-                    food=farmers*((3/(1+5*(2.718)**(-.5*((10*self.tools)/farmers))))+1)
+                    food=1.2*farmers*((1.5/(1+5*(2.718)**(-.5*((10*self.tools)/farmers))))+1)
+                    self.food=food
                     tooluse=.9*newtools
                 if (self.pop*.1)>self.farmland:
-                    food=farmers
+                    food=farmers*((1.5/(1+5*(2.718)**(-.5*((10*self.tools)/farmers))))+1)
+                    self.food=self.food
                     print("pleasegodnoyouroneofthemanr'tyou")
                     self.tools=self.tools-tooluse
                 improvementrelations=random.randint(1,2)+(self.trade/10000)
@@ -228,7 +236,7 @@ class Population:
                 qualityoflife=newwealth/self.pop
                 self.wealth=self.wealth+newwealth
                 housecap=7*self.houses
-                foodcap=food
+                foodcap=self.food
                 if self.pop<foodcap and self.pop<housecap:
                     popgrowth=(.1*(self.pop))
                     if (popgrowth+self.pop)>housecap:
@@ -253,7 +261,7 @@ class Population:
                 print("The strength of diplomatic relations is {0}".format(round(self.diplomaticrelations,1)))
                 print("The number of metaldeposits is {0}".format(round(self.metaldeposits,1)))
                 #print("The food use of your civilization is {0}".format(round(fooduse,0)))
-                if self.initialtechlevel=="ancient" and inventors>10:
+                if self.initialtechlevel=="ancient" and inventors>100:
                     techadvancechance=random.randint(0,10)*inventors*.4
                     self.techadvanceprogress=self.techadvanceprogress+.025*(techadvancechance)
                     #print(self.techadvanceprogress)
