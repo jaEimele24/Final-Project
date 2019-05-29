@@ -156,7 +156,7 @@ class Population:
                     self.forests=self.forests-(newwood/7)
                 if self.forests-(newwood/7)<0:
                     self.forests=0
-                self.farmland=self.farmland+(self.forests-(self.forests-(newwood*.1)))
+                self.farmland=self.farmland+(self.forests-(self.forests-(newwood*.05)))
                 self.wood=self.wood+newwood
                 #print(newwood)
                 #print(self.wood)
@@ -254,7 +254,10 @@ class Population:
                 
                 print("The housecap of your civilization is {0}".format((housecap)))
                 print("The population of your civilization is {0}".format(round(g, 0)))
-                print("The food output of your civilization is {0}".format(round(food,0)))
+                if (self.pop*.1)>self.farmland:
+                    print("The food output of your civilization is {0}".format(round(self.food,0)))
+                if (self.pop*.1)<self.farmland:
+                    print("The food output of your civilization is {0}".format(round(food,0)))
                 print("The new wealth of your civilization is {0}".format(round(newwealth,0)))
                 print("The total wealth of your civilization is {0}".format(round(self.wealth,0)))
                 print("The quality of life of your civilization is {0}".format(round(qualityoflife,1)))
