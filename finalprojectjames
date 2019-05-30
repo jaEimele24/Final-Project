@@ -24,12 +24,14 @@ class CivGame(App):
         self.initialtechlevel=input("enter the initial tech level here, either ancient, classical, mideval, renessance, industrial, modern, or future: ")
         pop=float(input("enter the initial population here,  at least 10 is optimal: "))
         self.techlevel=self.initialtechlevel
+        self.golddeposits=float(input("enter the amount of gold deposits: "))
         self.pop=Population(pop, self.farmland, self.k, self.forests, self.initialtechlevel, self.metaldeposits, self.techlevel)
     def step(self):
         self.pop.step()
 #Population Dynamics
 class Population:
-    def __init__(self, pop, farmland, k, forests, initialtechlevel, metaldeposits, techlevel):
+    def __init__(self, pop, farmland, k, forests, initialtechlevel, metaldeposits, techlevel, golddeposits):
+        self.golddeposits=golddeposits
         self.pop=pop
         self.farmland=farmland
         self.k=k
@@ -131,6 +133,9 @@ class Population:
                 upperclass=merchants+nobles
                 middleclass=craftsmen+(.25*farmers)
                 lowerclass=(.75*farmers)+builders+woodcutters+forgers+smelters+miners
+                if self.golddeposits>0 or self.golddeposits==0:
+                    newgold=11*(.1)*miners
+                    
                 for i in range(0,int((forgers+smelters)/15)):
                     industrielcenter((random.randint(700,900), random.randint(300,500)))
                 self.forests=self.forests+(self.forests*.1)+(2*random.randint(1,2))
@@ -161,7 +166,7 @@ class Population:
                 #print(newwood)
                 #print(self.wood)
                 if self.metaldeposits > 0:
-                    newore=miners*11
+                    newore=miners*11*(.9)
                     if (self.metaldeposits-(newore*.01))>0:
                         self.metaldeposits=self.metaldeposits-(newore*.001)
                     elif self.metaldeposits-(newore*.01)<0:
@@ -232,6 +237,8 @@ class Population:
                 self.trade=newconsumergoods*(10*merchants)+newweapons*self.diplomaticrelations+newbarrels+newtools+(.1*food)+(.1*newwood)+(.1*newingots)
                 economicoutput=(food+newwood+newore+(10*newbarrels)+(10*newtools)+(20*newhouses)+(30*newbetterhouses)+(10*newconsumergoods)+(10*newweapons))
                 economicoutputpercapita=economicoutput/self.pop
+                #if self.metaldeposits<0 or self.metaldeposits==0:
+                    #if self.wealth=
                 newwealth=economicoutput*(3/(1+(2.718)**(-.05*self.trade/1000))+.45)
                 qualityoflife=newwealth/self.pop
                 self.wealth=self.wealth+newwealth
