@@ -21,16 +21,18 @@ class CivGame(App):
         self.metaldeposits=float(input("enter the amount of usable metals deposits there are: "))
         for i in range(0,int((self.metaldeposits))):
             listmetal.append(metaldeposit((random.randint(700,900), random.randint(0,200))))
+        self.golddeposits=int(input("enter the amount of gold deposits: "))
         self.initialtechlevel=input("enter the initial tech level here, either ancient, classical, mideval, renessance, industrial, modern, or future: ")
         pop=float(input("enter the initial population here,  at least 10 is optimal: "))
         self.techlevel=self.initialtechlevel
-        self.golddeposits=float(input("enter the amount of gold deposits: "))
-        self.pop=Population(pop, self.farmland, self.k, self.forests, self.initialtechlevel, self.metaldeposits, self.techlevel)
+        self.pop=Population(pop, self.farmland, self.k, self.forests, self.initialtechlevel, self.golddeposits, self.metaldeposits, self.techlevel)
     def step(self):
         self.pop.step()
 #Population Dynamics
 class Population:
-    def __init__(self, pop, farmland, k, forests, initialtechlevel, metaldeposits, techlevel, golddeposits):
+    def __init__(self, pop, farmland, k, forests, golddeposits, initialtechlevel, metaldeposits, techlevel,):
+        print(initialtechlevel)
+        print(golddeposits)
         self.golddeposits=golddeposits
         self.pop=pop
         self.farmland=farmland
@@ -38,7 +40,7 @@ class Population:
         self.forests=forests
         self.initialtechlevel=initialtechlevel
         self.metaldeposits=metaldeposits
-        self.techlevel=techlevel
+        self.techlevel=initialtechlevel
         self.techadvanceprogress=0
         self.houses=0
         self.tools=0
@@ -133,9 +135,9 @@ class Population:
                 upperclass=merchants+nobles
                 middleclass=craftsmen+(.25*farmers)
                 lowerclass=(.75*farmers)+builders+woodcutters+forgers+smelters+miners
-                if self.golddeposits>0 or self.golddeposits==0:
+                print(self.golddeposits)
+                if int(self.golddeposits)>0 or self.golddeposits==0:
                     newgold=11*(.1)*miners
-                    
                 for i in range(0,int((forgers+smelters)/15)):
                     industrielcenter((random.randint(700,900), random.randint(300,500)))
                 self.forests=self.forests+(self.forests*.1)+(2*random.randint(1,2))
