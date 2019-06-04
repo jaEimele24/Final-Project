@@ -30,7 +30,7 @@ class CivGame(App):
         self.pop.step()
 #Population Dynamics
 class Population:
-    def __init__(self, pop, farmland, k, forests, golddeposits, initialtechlevel, metaldeposits, techlevel,):
+    def __init__(self, pop, farmland, k, forests, initialtechlevel, golddeposits, metaldeposits, techlevel,):
         print(initialtechlevel)
         print(golddeposits)
         self.golddeposits=golddeposits
@@ -69,20 +69,20 @@ class Population:
                 if self.forests>0:
                     newwood=int(5*woodcutters)
                     self.forests=int(self.forests-(newwood*.2))
-                    print("trees are mean")
-                    print(self.forests-(self.forests-(newwood*.2)))
+                    #print("trees are mean")
+                    #print(self.forests-(self.forests-(newwood*.2)))
                     for i in range(0,int(self.forests-(self.forests-(newwood*.2)+1))):
                         if len(listtrees)>0:
                             l=random.choice(listtrees)
                             #print(len(listtrees))
                             l.destroy()
                             listtrees.remove(l)
-                    print("*** ", len(listtrees), "trees (just removed some)")
+                    #print("*** ", len(listtrees), "trees (just removed some)")
                     self.wood=self.wood+newwood
                 self.forests=self.forests+(self.forests*.002)+2
                 for i in range (0,int((self.forests*.002)+2)):
                     listtrees.append(tree((random.randint(0,200), random.randint(0,200))))
-                print("*** ", len(listtrees), "trees (just added some)")
+                #print("*** ", len(listtrees), "trees (just added some)")
                 #print(self.forests)
                 if self.wood>0 and self.houses<(self.pop*1.2):
                     newhouses=builders
@@ -109,7 +109,7 @@ class Population:
                 inventors=random.randint(1,10)*(.01*self.pop)+(.0005*(food-fooduse))
                 techadvancechance=0
                 print("The number of usable trees is {0}".format(round(self.forests,0)))
-                print("The housecap of your civilization is {0}".format((housecap)))
+                print("The housecap of your civilization is {0}".format(round(housecap,0)))
                 print("The population of your civilization is {0}".format(round(g, 0)))
                 print("The food output of your civilization is {0}".format(round(food,0)))
                 print("The food use of your civilization is {0}".format(round(fooduse,0)))
@@ -138,7 +138,7 @@ class Population:
                 print(self.golddeposits)
                 if int(self.golddeposits)>0 or self.golddeposits==0:
                     newgold=11*(.1)*miners
-                for i in range(0,int((forgers+smelters)/15)):
+                for i in range(0,int((forgers+smelters)/12)):
                     industrielcenter((random.randint(700,900), random.randint(300,500)))
                 self.forests=self.forests+(self.forests*.1)+(2*random.randint(1,2))
                 for i in range (0,int((self.forests*.002)+2)):
@@ -146,7 +146,7 @@ class Population:
                 newbetterhouses=0
                 if self.forests==0 or self.forests<0:
                     newwood=0
-                    print("Ispeakforthetrees")
+                    #print("Ispeakforthetrees")
                 if self.forests>0:
                     if self.forests-(woodcutters/7)>0:
                         newwood=7*woodcutters
@@ -156,7 +156,7 @@ class Population:
                                 #print(len(listtrees))
                                 l.destroy()
                                 listtrees.remove(l)
-                        print("*** ", len(listtrees), "trees (just removed some)")
+                        #print("*** ", len(listtrees), "trees (just removed some)")
                 if self.forests-(woodcutters/7)<0:
                     newwood=self.forests*7
                 if self.forests-(newwood/7)>0:
@@ -204,8 +204,8 @@ class Population:
                     self.ingots=self.ingots-(.2*ingotmarker)
                 if self.ingots>0 and self.wood>0:
                     newbetterhouses=.02*(builders/(.1*(self.ingots+.00001)))*(builders/(.1*(self.wood+.00001)))
-                    print("newbetterhouses is")
-                    print(newbetterhouses)
+                    #print("newbetterhouses is")
+                    #print(newbetterhouses)
                     self.ingots=self.ingots-(.2*ingotmarker)
                     self.betterhouses=self.betterhouses+newbetterhouses
                     for i in range(0,int(newbetterhouses)):
@@ -232,7 +232,7 @@ class Population:
                 if (self.pop*.1)>self.farmland:
                     food=farmers*((1.5/(1+5*(2.718)**(-.5*((10*self.tools)/farmers))))+1)
                     self.food=self.food
-                    print("pleasegodnoyouroneofthemanr'tyou")
+                    #print("pleasegodnoyouroneofthemanr'tyou")
                     self.tools=self.tools-tooluse
                 improvementrelations=random.randint(1,2)+(self.trade/10000)
                 self.diplomaticrelations=self.diplomaticrelations+improvementrelations
@@ -256,7 +256,7 @@ class Population:
                     self.pop=self.pop-(self.pop-foodcap)
                 elif self.pop>housecap: 
                     self.pop=self.pop
-                    print("feels like a tokyo subway")
+                    #print("feels like a tokyo subway")
                 g=self.pop
                 inventors=random.randint(1,10)*(.02*self.pop)+(.0005*(food-fooduse))
                 techadvancechance=0
